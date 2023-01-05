@@ -1,7 +1,13 @@
 {
     "keyboard_name": "Lily58", 
-    "url": "", 
-    "maintainer": "liliums", 
+    "url": "",
+    "maintainer": "liliums",
+    "manufacturer": "keyhive",
+    "usb": {
+        "vid": "0x04D8",
+        "pid": "0xEB2D",
+        "device_version": "1.0.0"
+    },
     "layouts": {
         "LAYOUT": {
             "layout": [

@@ -2,13 +2,6 @@
 
 #include "config_common.h"
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x04D8
-#define PRODUCT_ID      0xEB2D
-#define DEVICE_VER      0x0100
-#define MANUFACTURER    liliums
-#define PRODUCT         Lily58
-
 /* key matrix size */
 // Rows are doubled-up
 #define MATRIX_ROWS 10
@@ -26,11 +19,6 @@
 // Define Communication
 #define USE_SERIAL
 #define SOFT_SERIAL_PIN D2
-
-// Detects USB and assigns master (Not recommended on Elite C/Pro Micro mix)
-#define SPLIT_USB_DETECT
-#define SPLIT_USB_TIMEOUT 2000
-#define SPLIT_USB_TIMEOUT_POLL 10
 
 // Allows dual displays to show modifiers etc
 #define SERIAL_USE_MULTI_TRANSACTION
