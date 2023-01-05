@@ -3,7 +3,6 @@
 // Layers
 enum layers {
     _QWERTY,
-    _COLEMAK,
     _LOWER,
     _RAISE,
     _SYSTEM,
@@ -12,9 +11,7 @@ enum layers {
 // Custom keycode declarations
 enum custom_keycodes {
     KC_PREV_WORD = SAFE_RANGE,  // ensure macro codes get unique numbers internally
-    KC_NEXT_WORD,
-    QWERTY,
-    COLEMAK
+    KC_NEXT_WORD
 };
 
 // Custom keycode definitions
@@ -29,17 +26,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_NEXT_WORD:
             if (record->event.pressed) {
                 SEND_STRING(SS_LCTL(SS_TAP(X_RIGHT)));  // ctrl + right
-            }
-            return false;
-        // layout macros
-        case QWERTY:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
-            }
-            return false;
-        case COLEMAK:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_COLEMAK);
             }
             return false;
     }
@@ -88,33 +74,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT(
     KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
     KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,
-    KC_LCTRL, MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                       KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_QUOT,
+    KC_LCTL,  MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                       KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_QUOT,
     KC_LSFT,  KC_Z,    MT_X,    KC_C,    KC_V,    KC_B,   KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, MT_DOT,  KC_SLSH, KC_BSLS,
                                 KC_LALT, KC_LGUI, LOWER,  KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_DEL
-),
-
-
-/* COLEMAK-DH
- * ,-----------------------------------------.   ___        ___   .-----------------------------------------.
- * | Esc  |   1  |   2  |   3  |   4  |   5  |  | O |      | O |  |   6  |   7  |   8  |   9  |   0  |   -  |
- * |------+------+------+------+------+------|  | L |      | L |  |------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   F  |   P  |   B  |  | E |      | E |  |   J  |   L  |   U  |   Y  |   ;  |   =  |
- * |------+------+------+------+------+------|  |_D_|      |_D_|  |------+------+------+------+------+------|
- * |LCtrl |   A  |   R  |   S  |   T  |   G  |-------.    .-------|   M  |   N  |   E  |   I  |   O  |   '  |
- * |------+------+------+------+------+------|   [   |    |   ]   |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |   \  |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| Del  |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-
-[_COLEMAK] = LAYOUT(
-    KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-    KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                       KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL,
-    KC_LCTRL,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                       KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,   KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
-                                 KC_LALT, KC_LGUI, LOWER,  KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_DEL
 ),
 
 /*LOWER
@@ -182,9 +144,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYSTEM] = LAYOUT(
   QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR,                   XXXXXXX, KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,
-  NK_TOGG, QWERTY,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_PEQL,
+  NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_PEQL,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, XXXXXXX,
-  KC_CAPS, XXXXXXX, XXXXXXX, COLEMAK, XXXXXXX, XXXXXXX, _______, _______, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PDOT, XXXXXXX,
+  KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PDOT, XXXXXXX,
                              _______, _______, _______, _______, KC_PENT, _______, _______, _______
   )
 };
@@ -228,21 +190,8 @@ void render_default_layer_state(void) {
             oled_write_P(PSTR("SYS "), false);
             break;
         default:
-            // for some reason, get_highest_layer(layer_state) returns _QWERTY
-            // even if the default layer has been changed with DH() or set_single_persistent_default_layer()
-            // default_layer_state should update properly in all cases
-            if (default_layer_state == 1) {
-                oled_write_P(PSTR("QRTY"), false);
-                break;
-            }
-            else if (default_layer_state == 2) {
-                oled_write_P(PSTR("CLMK"), false);
-                break;
-            }
-            else {
-                oled_write_P(PSTR("????"), false);
-                break;
-            }
+            oled_write_P(PSTR("QRTY"), false);
+            break;
     }
 }
 
